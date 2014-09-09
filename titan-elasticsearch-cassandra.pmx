@@ -37,31 +37,26 @@ documentation: "# Docker Image for Titan Graph Database\n\nTitan is a free, open
 images:
 - name: dockerfile_elasticsearch_latest
   source: dockerfile/elasticsearch:latest
-  category: Storage/Indexing
+  category: Indexing
   type: Default
-  expose:
-  - '9200'
-  - '9300'
 - name: poklet_cassandra
   source: poklet/cassandra:latest
-  category: Storage/Indexing
+  category: Storage
   type: Default
-  expose:
-  - '22'
-  - '61621'
-  - '7000'
-  - '7199'
-  - '8012'
-  - '9042'
-  - '9160'
 - name: apobbati_titan-rexster
   source: apobbati/titan-rexster:latest
   category: Database
   type: Default
-  expose:
-  - '8182'
-  - '8183'
-  - '8184'
+  ports:
+  - host_port: '8182'
+    container_port: '8182'
+    proto: TCP
+  - host_port: '8183'
+    container_port: '8183'
+    proto: TCP
+  - host_port: '8184'
+    container_port: '8184'
+    proto: TCP
   links:
   - service: dockerfile_elasticsearch_latest
     alias: elasticsearch
